@@ -1,0 +1,67 @@
+%-------------------------------------------------------------------------
+% 字体设定相关
+%-------------------------------------------------------------------------
+\usepackage{ctex}																		% 调用CJK(中日韩)字体宏包
+
+%--英文
+%\setmainfont{latinmodernmath.otf}														% 全局西文使用指定字体(author:对beamer无效)
+\setsansfont[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{latinmodernmath.otf}				% 全局西文使用指定字体(author:对beamer有效)
+\newfontfamily\latmath[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{latinmodernmath.otf}	% 加载目录中指定数学字母字体
+\newfontfamily\euler[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{euler.otf}				% 加载目录中指定英文字体
+
+%--中文
+%\setCJKmainfont{KaiTi.ttf}																% 全局中文使用指定字体 (author:对beamer无效)
+\setCJKsansfont[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{KaiTi.ttf}					% 全局中文使用指定字体 (author:对beamer有效)
+%\setCJKfamilyfont{kt}[Path = fonts/]{KaiTi.ttf}										% ::{自定义的CJKfamily名称}{字体名称} (author:命令太长弃用)
+%\newcommand{\KT}{\CJKfamily{kt}}														% ::{自定义指令名}{\CJKfamily{自定义的CJKfamily名称}}(author:命令太长弃用)
+\let\kaishu\relax 																		% 清除旧定义
+\newCJKfontfamily\FZLBFW[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{FZLBFW.TTF}			% 加载指定目录的中文字体,并设定粗体,斜体
+\newCJKfontfamily\FZLBJW[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{FZLBJW.TTF} 			% 加载指定目录的中文字体,并设定粗体,斜体
+
+
+%--特殊字体,比如符号,小图标
+\RequirePackage{Theme/Fonts/fontawesome}
+\newfontfamily{\FA}[Path = Theme/Fonts/,AutoFakeBold,AutoFakeSlant]{FontAwesome.otf}
+
+\CTEXoptions[today=old]																	% 使用旧的时间格式
+
+%---------------
+%tikz(形状图形) ,pgf(画函数图) 相关库		%
+%---------------
+\RequirePackage{tikz}
+\usetikzlibrary{bending,arrows,shapes,graphs,spy,datavisualization}
+\usetikzlibrary{backgrounds,positioning,fit,petri}
+\usetikzlibrary{decorations.fractals,decorations.pathmorphing}							% 分形图宏包
+\usetikzlibrary{math}																	% 用于\tikzmath 命令
+\usetikzlibrary{calc}																	% 用于计算($()+()$) 之类的命令
+\usepackage{pgfplots}																	% PGF宏包
+\pgfplotsset{compat=1.16}
+\usepackage{pgfmath}																	% 用于 \pgfmathparse 的命令
+
+
+%---------------
+%动画宏包		%
+%---------------
+\usepackage{graphicx}																	
+\usepackage{animate}
+
+
+%---------------
+%math相关宏包		%
+%---------------
+\usepackage{extarrows}
+\usepackage{ifthen}																% 引入判断语句宏包
+\usepackage{wasysym}															% 数学符号宏包
+\usefonttheme[onlymath]{serif}													% 设置数学公式字体
+
+
+
+%---------------
+%其它宏名		%
+%---------------
+\usepackage{hyperref}
+%\hypersetup{pdfpagemode=FullScreen}												% 默认开启PDF 全屏
+% 二维码宏包
+\usepackage{qrcode}
+
+

@@ -1,0 +1,93 @@
+%-------------------------------------------------------------------------
+% Frametitle style
+%-------------------------------------------------------------------------
+\tikzset{
+	tts@frametitle/.style={
+		rectangle,
+		fill=frametitlebg,
+		text width = \paperwidth, 
+		text height=1cm,
+		anchor=north west,
+		inner sep=0,
+		outer sep=0
+	}
+}
+
+%----------------------------------------------------------
+% (0,0) is at the left-top text potision, excluding margins 
+% top margin: 0.5cm; left margin: 1cm                       
+% so the left-top point is (-1,0.5)  
+%----------------------------------------------------------
+\defbeamertemplate*{frametitle}{text left}{
+	\begin{tikzpicture}[remember picture,overlay]
+	    %\node[tts@frametitle] at (current page.north west) {};
+	    \node[frametitlefg,anchor=north,text width = \textwidth,align=left,xshift=-0.25cm,yshift=-0.1cm] (logo1) at (current page.north) {$^{^\text{\faMapSigns}}$};
+	    \node[frametitlefg,text width = \textwidth,align=left] at ($(logo1)+(3mm,0)$) {\insertframetitle};
+	\end{tikzpicture}	
+}
+
+
+
+
+%-------------------------------------------------------------------------
+% Chapterframe frametitle style
+%-------------------------------------------------------------------------
+\tikzset{
+	tts@chaptertitlebg/.style={
+		rectangle,
+		fill=chapterbg,
+		anchor=west,
+		text height=1cm,
+		text width =0.22*\paperwidth+1cm,
+		inner sep=0pt,
+		outer sep=0pt,
+		yshift=0.5cm
+	}
+}
+
+\tikzset{
+	tts@chaptertitle/.style={
+		titlefg,
+		text width = 0.22*\paperwidth,
+		align = right,
+		inner sep = 0pt,
+		outer sep=0pt,
+		shift={(1cm,0.5cm)},
+		anchor = west
+	}
+}
+
+\defbeamertemplate*{frametitle}{chaptertitle}{
+	\begin{tikzpicture}[remember picture, overlay]
+	    \node[tts@chaptertitlebg] at (current page.west) {};
+	    \node[tts@chaptertitle] at (current page.west){
+	    	\usebeamerfont{frametitle}\insertframetitle
+	    	\hspace*{2ex}\  
+	    };                           
+	\end{tikzpicture}
+
+}
+
+
+
+
+
+
+
+
+
+
+\tikzset{
+	tts@thanks/.style={
+	rectangle, fill=frametitlebg,
+	text width = \paperwidth,  text height=1.2cm,
+	inner sep=0, outer sep=0
+	}
+}
+\defbeamertemplate*{frametitle}{thanks}{
+
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[tts@thanks] at (current page.center) {};
+	\node[titlefg,text width = \textwidth,align=center] at (current page.center) { \fontfamily{llcmss}\selectfont \insertframetitle \fontfamily{\familydefault}\selectfont};
+	\end{tikzpicture}	
+}

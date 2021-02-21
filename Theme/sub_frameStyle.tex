@@ -1,0 +1,31 @@
+%-------------------------------------------------------------------------
+% Chapterframe
+%-------------------------------------------------------------------------
+
+\newenvironment{chapterframe}
+{
+	\setbeamertemplate{frametitle}[chaptertitle]
+	\setbeamertemplate{itemize item}[tts@square]
+    \begin{frame}
+    	\begin{minipage}{0.15\paperwidth} % expression "\paperwidth/5" is not allowed
+    		\tikz\path (0,0) -- (0.15*\paperwidth,0.15*\paperwidth);
+    	\end{minipage}\hfill\minipage{0.6\paperwidth}
+
+}{  
+    \endminipage
+    \end{frame}
+}
+
+
+%-------------------------------------------------------------------------
+% Thanksframe
+%-------------------------------------------------------------------------
+
+\newenvironment{thanksframe}
+{
+	\setbeamertemplate{frametitle}[thanks]
+	\begin{frame}[plain]
+}{
+    \end{frame}
+}
+

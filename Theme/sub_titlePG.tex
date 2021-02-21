@@ -1,0 +1,154 @@
+%------------------------------------------------------------
+% title style
+%------------------------------------------------------------
+\tikzset{
+	tts@title/.style={
+		rectangle,
+		titlefg,
+		fill = titlebg,
+		inner ysep = 10pt,
+		minimum width = \paperwidth,
+		text width = \textwidth,
+		align = center,
+		anchor = south
+	}
+}
+
+%------------------------------------------------------------
+% subtitle style
+%------------------------------------------------------------
+\tikzset{
+	tts@subtitle/.style={
+		rectangle,
+		subtitlefg,  
+		fill = titlebg,
+		text height = 5pt,
+		text depth = 3pt,
+		node distance = -10pt,
+		minimum width = \paperwidth,
+		text width = \textwidth,
+		align = center
+	}
+}
+
+%------------------------------------------------------------
+% author style
+%------------------------------------------------------------
+\tikzset{
+	tts@author/.style={
+		authorfg,
+		inner sep=0,
+	}
+}
+%------------------------------------------------------------
+% email style
+%------------------------------------------------------------
+\tikzset{
+	tts@email/.style={
+		emailfg,align = left,inner sep=0,anchor= west,font={\fz{5pt}}
+	}
+}
+
+%------------------------------------------------------------
+% institute style
+%------------------------------------------------------------
+\tikzset{
+	tts@institute/.style={
+		institutefg,
+%		text width = \textwidth,
+		align = center,
+		anchor = north,
+		execute at begin node=\linespread{1.2}
+	}
+}
+
+%------------------------------------------------------------
+% github style
+%------------------------------------------------------------
+\tikzset{
+	tts@github/.style={
+		githubfg,inner sep=0,
+	}
+}
+
+%------------------------------------------------------------
+% date style
+%------------------------------------------------------------
+\tikzset{
+	tts@date/.style={
+		datefg,inner sep=0,anchor=east
+	}
+}
+
+
+\defbeamertemplate*{title page}{tts}{
+	\begin{tikzpicture}[overlay,shift={(0,0)}]
+	%--------
+	% title %
+	%--------
+	\node[tts@title] (title) at (\textwidth/2,0.25) {\usebeamerfont{title}\inserttitle \hspace{2mm}\textcolor{SeaGreen}{\fz{14pt}\faPagelines}};
+	\draw[fill,black!55]   (title.north west) rectangle ($ (title.north west) +(3cm,1mm)$) node[anchor=north west,xshift=1pt,inner sep=0] {\fz{2.5pt}{ \hspace{0.72pt}\faGraduationCap\hspace{0.72pt}\faGroup\hspace{0.72pt}\faCreativeCommons}};
+	
+	%-----------
+	% subtitle %
+	%-----------
+	\ifdefined\insert@subtitle
+	\node[tts@subtitle] (subtitle) [below = of title] {\textcolor{white}{\faRefresh\usebeamerfont{subtitle}\insert@subtitle}};
+	\else
+	\fi
+	
+	%------------
+	% institute %
+	%------------
+	\ifdefined\insert@institute
+	\node[tts@institute] (institute) [below = 1mm of subtitle] {\usebeamerfont{institute}\insert@institute};
+	\else
+	\fi
+	
+	%------------
+	% logo %
+	%------------
+	\ifdefined\insert@institute
+	\node[] (logo) at (\textwidth/2,-2) {\insert@logo};
+	\else
+	\fi
+	
+	%--------
+	% github %
+	%--------
+	\ifdefined\insertgithub
+		\node[tts@github,anchor=east,align=right] (githubtag) at (\textwidth*1/50, -4.4) {\fz{7 pt} \faCloudDownload\hspace{0.3mm}\faCodeFork\hspace{0.3mm}\faGithub:};
+		\node[tts@github,anchor= text] (github) at ($(githubtag.text)+(9mm,0mm)$) {\fz{6 pt}\texttt{\insertgithub}};
+	\fi
+	
+	%------------------
+	% author(speaker) %
+	%------------------
+	\node[tts@author,anchor=east,align=right] (authortag) at (\textwidth*1/50,-4) {\fz{7pt}\faStreetView :};
+	\node[tts@author,anchor=text] (author)  at ($(authortag.text)+(3.5mm,0mm)$) {\usebeamerfont{author}\insertauthor};
+	
+	
+	%------------------
+	% eamil%
+	%------------------	
+	\ifdefined\insertemail
+		\node[tts@email] (eamil)  [right= 0.75mm of author.east]  {($^{\text{\faEnvelopeO}}$\insertemail)};
+	\fi
+	%-------
+	% date %
+	%-------
+	\ifdefined\insert@date
+	\node[tts@date] (date) at (\textwidth, -4.4) {\usebeamerfont{date}\texttt{\insert@date}};
+	\fi
+	\end{tikzpicture}
+}
+
+
+
+\defbeamertemplate*{background}{}{
+\begin{tikzpicture}[overlay]
+
+\node at (6,4){eeeeeeeeeeeee};
+
+\end{tikzpicture}	
+	}

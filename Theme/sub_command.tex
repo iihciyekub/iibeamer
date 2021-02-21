@@ -1,0 +1,82 @@
+%---------------
+%设置字体大小		%
+%---------------
+\newcommand{\fz}[1]{\fontsize{#1}{\baselineskip}\selectfont\setlength{\baselineskip}{15pt}}
+%---------------
+%定义标题		%
+%---------------
+\renewcommand{\subtitle}[1]{\def\insert@subtitle{#1}}
+\renewcommand{\institute}[1]{\def\insert@institute{#1}}
+\renewcommand{\date}[1]{\def\insert@date{#1}}
+\renewcommand{\logo}[1]{\def\insert@logo{#1}}
+\newcommand{\email}[1]{\def\insertemail{#1}}
+%\renewcommand{\author}[1]{\def\insert@author{#1}}
+\newcommand{\github}[1]{\def\insertgithub{#1}}
+\newcommand{\inframeauthor}[1]{\def\insertinframeauthor{#1}}
+\newcommand{\inframeinstitute}[1]{\def\insertinframeinstitute{\fz{5pt}{#1}}}
+
+
+
+%---------------
+%作者签名	%
+%---------------
+\def\iiname{
+	\hspace{-1.3ex}$^\dag${\hspace{-1.3ex}\texttt{
+			\raisebox{-0.16ex}{Y}\hspace{-.4ex}\raisebox{0.72ex}{.}\hspace{-.4ex}\textbf{J}\hspace{-.3ex}\raisebox{0.72ex}{.}\hspace{-.2ex}\raisebox{-0.16ex}{L}\hspace{-.45ex}\raisebox{-0.4ex}{i}
+		}\hspace{-1.3ex}}
+}
+
+%---------------
+%显示每帧页面的辅助背景		%
+%---------------
+\newcommand{\hideiitikzgrid}{\global\def\F{0}}
+\newcommand{\showiitikzgrid}{\global\def\F{1}}
+
+
+% 二维码
+\newcommand{\iiprcode}[1]{
+	\tikz[anchor=west]{
+		\coordinate (o) at (0,0);
+		\node[inner sep=2pt,draw=black,line width=0.15pt] (A) at (o) {\qrcode[height=1cm,hyperlink]{#1}};
+		\node[right =3mm of A] (B) {\textit{{\tiny \color{red}{\url{#1}}}}};
+		\draw [->latex] (A) -- (B);
+	}
+}
+
+
+
+
+\newenvironment{iitikz}{
+	\begin{tikzpicture}[remember picture,overlay]
+	\tikzset{every node/.style={anchor=north west,inner sep=0pt}}
+	\def\T{1}
+	\if\T\F{\xdef\setbTopacity{0.25}}\else{\xdef\setbTopacity{0}}\fi
+	%		\clip (0, 0) rectangle (\textwidth, \textheight*0.9);
+	\coordinate (LB) at (current page.south west) ;
+	\coordinate (RA) at (\textwidth,\textheight*0.9);
+	\coordinate (org) at (0,0);
+	\if\T\F
+	\begin{scope}[opacity=\setbTopacity]
+	% 子圖全局透明設置
+	\draw[opacity=\setbTopacity*0.7] (0,0) -- (\textwidth,0) --(\textwidth,\textheight*0.9) --(0,\textheight*0.9) -- cycle;
+	\fill[red!50]   (org) circle (3pt);		
+	\draw[line width=.15pt,help lines,gray,step=0.2cm,opacity=0.4*\setbTopacity] (org) grid (RA);
+	\draw[line width=.45pt,help lines,gray,step=1cm,opacity=0.8*\setbTopacity] (org) grid (RA);
+	
+	\foreach \x in {1,...,14}{
+		\foreach \y in {1,2,...,7}{
+			\node[opacity=\setbTopacity*0.5,anchor=north east,xshift=2mm,yshift=1mm,font={\fz{5 pt}\euler}] at ($(org)+(\x cm,\y cm )$) { (\x ,\y)};
+			\fill[opacity=\setbTopacity*0.5] ($(org)+(\x cm,\y cm )$) circle (0.5pt);
+		}
+	}
+	
+	\end{scope}
+	\fi
+}{
+	\end{tikzpicture}
+}
+
+
+
+
+

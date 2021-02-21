@@ -1,0 +1,77 @@
+%-------------------------------------------------------------------------
+% Footline frame number style
+%-------------------------------------------------------------------------
+\tikzset{
+	tts@framenumber/.style={
+		rounded rectangle,
+		framenumberfg,  
+		fill = framenumberbg,
+		inner sep = 1pt,
+		anchor = east,font={\fz{5pt}}
+	}
+}
+
+
+%-------------------------------------------------------------------------
+% Inframe author style
+%-------------------------------------------------------------------------
+\tikzset{
+	tts@inframeauthor/.style={
+		footlinefg, 
+		anchor = east,
+		inner sep=0pt,xshift=2mm,font={\fz{5pt}}
+	}
+}
+
+
+%-------------------------------------------------------------------------
+% Inframe institute style
+%-------------------------------------------------------------------------
+\tikzset{
+	tts@inframeinstitute/.style={
+		footlinefg, 
+		anchor = west,font={\fz{5pt}}
+	}
+}
+% logo style
+\tikzset{
+	tts@inframeinstitutelogo/.style={
+		rounded rectangle,
+		framenumberfg,
+		fill=framenumberbg, 
+		inner sep=1pt, 
+		anchor = west,font={\fz{5pt}}
+	}
+}
+%----------------------------------------------------- 
+% (0,0) is at the left-bottom point, including margins
+% the right-bottom point is (12.8,0)                      
+%-----------------------------------------------------
+\defbeamertemplate*{footline}{}{
+	\vspace{1cm} % spacing
+	\newcommand{\xt}{\paperwidth*  \insertframenumber / \inserttotalframenumber}
+	\begin{tikzpicture}[overlay]
+	    \node[tts@framenumber] (pgno) at (\paperwidth*0.98,0.2) {\insertframenumber\ of \inserttotalframenumber};
+	    
+		\pgfmathsetmacro{\xt}{(int(\insertframenumber)-1) / (int(\inserttotalframenumber) -2 )}
+	    \draw[fill=black!70,draw=none]  (current page.north west) rectangle ($(current page.north east)+(0,-0.65mm)$);
+	    \draw[draw=none,fill=yellow,opacity=90,yshift=- \paperheight+2mm]  (current page.north west) rectangle ($(current page.north west)+(\paperwidth *\xt,-0.65mm)$)  node(po)[anchor=north,color=gray,yshift=0.2mm,text opacity=0.55] {\faAngleDoubleUp \fz{3pt}};
+	    \xt
+		\pgfmathsetmacro{\pn}{int(\xt*100)}
+	    \node[anchor=east,color=gray] at ($(po)+(-0.2mm,0)$) {\fz{2.5pt}$\pn\%$};
+	    
+	    
+	    \ifdefined\insertinframeauthor
+	        \node[tts@inframeauthor,anchor=east,] at ($(pgno.west)-(3mm,0)$) {\insertinframeauthor};
+	    \fi
+	    \ifdefined\insertinframeinstitute
+	        \node[tts@inframeinstitutelogo] (logo) at (\paperwidth*0.02,0.2) {\tiny $\Im$};  
+	        \node[tts@inframeinstitute] at ($(logo.east)+(0.5mm,-0.2mm)$) {\insertinframeinstitute}; 
+	    \fi    
+	\end{tikzpicture}
+}
+
+
+
+
+

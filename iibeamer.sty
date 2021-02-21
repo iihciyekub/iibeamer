@@ -1,0 +1,127 @@
+%-------------------------------------------------------------------------
+%
+% Latex-Beamer theme. ver 0.0.1
+%
+% Author:		LYJ
+% Last update:	2021/**/**
+%
+% ------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{iibeamer}
+
+\mode<presentation>
+
+%-------------------------------------------------------------------------
+% 字体设定相关
+%-------------------------------------------------------------------------
+\input{Theme/sub_Package}
+
+
+
+%-------------------------------------------------------------------------
+% 命令集
+%-------------------------------------------------------------------------
+\input{Theme/sub_command}
+
+
+
+%-------------------------------------------------------------------------
+% 颜色设置相关
+%-------------------------------------------------------------------------
+\input{Theme/sub_color}
+
+
+%-------------------------------------------------------------------------
+% Fonts
+%-------------------------------------------------------------------------
+\input{Theme/sub_fonts}
+
+
+
+%-------------------------------------------------------------------------
+% 页面布局
+%-------------------------------------------------------------------------
+\newlength{\leftrightmargin}
+\setlength{\leftrightmargin}{0.75cm} % 设置页面左右边距
+\setbeamersize{text margin left =\leftrightmargin, text margin right = \leftrightmargin}
+
+
+
+
+
+%-------------------------------------------------------------------------
+% 首页
+%-------------------------------------------------------------------------
+
+\input{Theme/sub_titlePG}
+
+
+\setbeamertemplate{title page}[tts]						% 设置封面为指定的模板			
+% ensure that the titlepage is 'plain'
+\def\maketitle{\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi}
+
+
+%-------------------------------------------------------------------------
+% Outer frame
+%-------------------------------------------------------------------------
+\setbeamertemplate{navigation symbols}{}		% 设置页面不显示导航条
+
+% Frametitle
+\input{Theme/sub_titleStyle}
+\setbeamertemplate{frametitle}[text left]		% 设置页面标题向左对齐
+
+% Footline
+\input{Theme/sub_footLine}
+
+
+%-------------------------------------------------------------------------
+% Inner frame
+%-------------------------------------------------------------------------
+
+% itemize item symbol
+\defbeamertemplate{itemize item}{tts@triangle}{\textcolor{black!75}{\scriptsize $\bullet$}}
+\defbeamertemplate{itemize item}{tts@square}{\textcolor{black!50}{\scriptsize $\bullet$}}
+\setbeamertemplate{itemize item}[tts@triangle]
+
+% itemize subitem symbol
+\defbeamertemplate{itemize subitem}{tts@star}{\textcolor{black!50}{$\bullet$}}
+\setbeamertemplate{itemize subitem}[tts@star]
+
+% block
+\input{Theme/sub_block}
+
+% baselineskip
+
+
+%-------------------------------------------------------------------------
+% Frames: chapterframe, thanksframe
+%-------------------------------------------------------------------------
+\input{Theme/sub_frameStyle}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\mode<all> 
+\endinput
